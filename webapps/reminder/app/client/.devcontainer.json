@@ -1,0 +1,18 @@
+{
+	"dockerComposeFile": [
+		"../../docker-compose.yml"
+	],
+	"service": "client",
+	"workspaceFolder": "/home/node/app",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"esbenp.prettier-vscode",
+				"visualstudioexptteam.vscodeintellicode",
+				"xabikos.javascriptsnippets",
+				"dbaeumer.vscode-eslint"
+			]
+		}
+	},
+	"remoteUser": "node"
+}

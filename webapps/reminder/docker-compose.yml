@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: ./docker/node-dev/Dockerfile
+    image: ${COMPOSE_PROJECT_NAME}_server
+    container_name: ${COMPOSE_PROJECT_NAME}_server
+    working_dir: /home/node/app
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    volumes:
+      - ./app/server:/home/node/app:cached
+    environment:
+      - SLACK_TOKEN=${SLACK_TOKEN}
+      - PORT=${SERVER_PORT}
+    tty: true
+
+  client:
+    build:
+      context: .
+      dockerfile: ./docker/node-dev/Dockerfile
+    container_name: ${COMPOSE_PROJECT_NAME}_client
+    working_dir: /home/node/app
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./app/client:/home/node/app:cached
+    environment:
+      - SERVER_HOST=${COMPOSE_PROJECT_NAME}_server
+      - SERVER_PORT=${SERVER_PORT}
+    tty: true
